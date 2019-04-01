@@ -5,4 +5,12 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
 - Install [PyTorch](http://pytorch.org/) by selecting your environment on the website and running the appropriate command.
 - Clone this repository.
   * Note: We currently only support Python 3+.
-- Then download the dataset by following the [instructions](#datasets) below.
+- Then download the dataset by following the [instructions](#Datasets) below.
+
+## Datasets
+- Go to the download folder
+- Run "sh download_<dataset>.sh" to download and preprocess the datasets
+
+## Experiments
+- Run the <...>_train_test.py file to get the results for our proposed Multi-Label model
+- Run the <...>_train_test_baseline.py file to get the results for the baseline
