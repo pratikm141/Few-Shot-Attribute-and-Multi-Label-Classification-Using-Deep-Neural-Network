@@ -32,8 +32,8 @@ for line in tqdm.tqdm(labelfile):
 #     break
 labelfile.close()
 
-arrfeat = np.array( feat,dtype='float32' )
-arrlabel = np.array( label,dtype='float32' )
+arrfeat = np.array( featlist,dtype='float32' )
+arrlabel = np.array( labellist,dtype='float32' )
 
 
 
