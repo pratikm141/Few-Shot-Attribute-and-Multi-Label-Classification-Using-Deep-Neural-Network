@@ -13,12 +13,17 @@ rm -rf celeba
 mkdir -p celeba
 
 cd celeba
-wget -O celeba_resized.zip https://ndownloader.figshare.com/files/14759408
-
 wget -O list_attr_celeba.txt https://ndownloader.figshare.com/files/14759465
 
-unzip celeba_resized.zip
+mkdir celeba_img
+cd celeba_img
+wget -O resized_celebA.zip https://ndownloader.figshare.com/files/14759408
+
+unzip resized_celebA.zip
 
 cd ..
-python preprocess_celeba.py
 
+cd ..
+
+
+python preprocess_celeba.py
