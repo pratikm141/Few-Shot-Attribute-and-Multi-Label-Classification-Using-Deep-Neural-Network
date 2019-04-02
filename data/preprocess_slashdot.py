@@ -4,7 +4,7 @@ import numpy as np
 import torch
 
 import tqdm
-labelfile =  open("../../data/slashdot/new/SLASHDOT-F.arff","r")
+labelfile =  open("./data/slashdot/SLASHDOT-F.arff","r")
 featlist = []
 labellist = []
 cnt = 0
