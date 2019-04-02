@@ -56,7 +56,7 @@ if not os.path.exists(directory):
 import pickle
 
 tensorFeat=pickle.load(open("./data/emotions/emotionsFeat.pkl","rb"))
-tensorLabel=pickle.load(open("./data/emotions/emotions	Label.pkl","rb"))
+tensorLabel=pickle.load(open("./data/emotions/emotionsLabel.pkl","rb"))
 
 
 import tqdm
