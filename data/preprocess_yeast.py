@@ -8,7 +8,7 @@ labelfile = open("./yeast/yeast.arff","r")
 i = 0
 feat = []
 label = []
-for line in file1:
+for line in labelfile:
     i = i+1
     if(i>=122):
         tmp =line[:len(line)-1].split(',')
