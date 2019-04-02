@@ -4,7 +4,7 @@ import numpy as np
 import torch
 
 import tqdm
-labelfile = open("../../data/llog/LLOG-F.arff","r")
+labelfile = open("./llog/LLOG-F.arff","r")
 featlist = []
 labellist = []
 cnt = 0
