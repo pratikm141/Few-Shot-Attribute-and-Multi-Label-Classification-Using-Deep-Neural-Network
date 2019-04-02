@@ -204,7 +204,7 @@ class FewShotEpisodeGeneratorLabel(nn.Module):
         return torch.stack(qs),torch.stack(qslabel),torch.stack(qr),torch.stack(qrlabel),labelarr
 
 
-n_labels= 5
+n_labels= 2
 n_samples_per_labels=args.shot
 n_train_labels=3
 n_val_labels=1
