@@ -726,7 +726,7 @@ def trainrest(epoch):
         lossClass = lossClass/len(inp)
         loss = lossClass
 
-        del supSet,supLabel,inp,inpLabel,reallabels`
+        del supSet,supLabel,inp,inpLabel,reallabels
         if(type(loss) != float):
             loss.backward()
             batchloss = loss.data.item()
