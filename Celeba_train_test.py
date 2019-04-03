@@ -335,7 +335,7 @@ def train(epoch):
                 if(i ==0):
                     distVectAvg = torch.mean(torch.mean(fd))
                 else:
-                    distVectAvg = torch.cat((distVectAvg,torch.mean(fd)))
+                    distVectAvg = torch.cat((distVectAvg.view(-1),torch.mean(fd).view(-1)))
 
             distVectAvg = distVectAvg.view(-1,n_labels)
 
@@ -474,7 +474,7 @@ def testval(epoch):
                 if(i ==0):
                     distVectAvg = torch.mean(torch.mean(fd))
                 else:
-                    distVectAvg = torch.cat((distVectAvg,torch.mean(fd)))
+                    distVectAvg = torch.cat((distVectAvg.view(-1),torch.mean(fd).view(-1)))
 
             distVectAvg = distVectAvg.view(-1,n_labels)
 
@@ -684,7 +684,7 @@ def trainrest(epoch):
                 if(i ==0):
                     distVectAvg = torch.mean(torch.mean(fd))
                 else:
-                    distVectAvg = torch.cat((distVectAvg,torch.mean(fd)))
+                    distVectAvg = torch.cat((distVectAvg.view(-1),torch.mean(fd).view(-1)))
 
             distVectAvg = distVectAvg.view(-1,n_labels)
 
@@ -821,7 +821,7 @@ def testvalrest(epoch):
                 if(i ==0):
                     distVectAvg = torch.mean(torch.mean(fd))
                 else:
-                    distVectAvg = torch.cat((distVectAvg,torch.mean(fd)))
+                    distVectAvg = torch.cat((distVectAvg.view(-1),torch.mean(fd).view(-1)))
 
             distVectAvg = distVectAvg.view(-1,n_labels)
 
