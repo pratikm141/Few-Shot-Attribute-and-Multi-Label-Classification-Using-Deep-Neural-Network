@@ -43,21 +43,21 @@ batch_size = 64
 epochs = args.epochs
 seed = 1
 loginterval= 200
-total_labels= 6
+total_labels= 19
 torch.manual_seed(seed)
 if usecuda:
     torch.cuda.manual_seed(seed)
     
 kwargs = {}
 
-directory = './results/emotions/base{}shot'.format(args.shot)
+directory = './results/birds/base{}shot'.format(args.shot)
 if not os.path.exists(directory):
     os.makedirs(directory)
 
 import pickle
 
-tensorFeat=pickle.load(open("./data/emotions/emotionsFeat.pkl","rb"))
-tensorLabel=pickle.load(open("./data/emotions/emotionsLabel.pkl","rb"))
+tensorFeat=pickle.load(open("./data/birds/birdsFeat.pkl","rb"))
+tensorLabel=pickle.load(open("./data/birds/birdsLabel.pkl","rb"))
 
 
 import tqdm
@@ -205,11 +205,11 @@ class FewShotEpisodeGeneratorLabel(nn.Module):
         return torch.stack(qs),torch.stack(qslabel),torch.stack(qr),torch.stack(qrlabel),labelarr
 
 
-n_labels= 2
+n_labels= 5
 n_samples_per_labels=args.shot
-n_train_labels=3
-n_val_labels=1
-n_test_labels=2
+n_train_labels=9
+n_val_labels=5
+n_test_labels=5
 n_q_per_label_train = 10
 n_q_per_label_val = 10
 n_q_per_label_test = 10
@@ -222,13 +222,14 @@ class Classifier(nn.Module):
     def __init__(self):
         super(Classifier, self).__init__()
         
-        self.fc1 = nn.Linear(72,64)
-        self.fc2 = nn.Linear(64,64)
-        self.fc3 = nn.Linear(64,32)
-        self.fc4 = nn.Linear(32,32)        
+        self.fc1 = nn.Linear(260,256)
+        self.fc2 = nn.Linear(256,128)
+        self.fc3 = nn.Linear(128,64)
+        self.fc4 = nn.Linear(64,32)
+        self.fc5 = nn.Linear(32,32)
+        
         
         self.relu = nn.ReLU()
-        self.sigmoid = nn.Sigmoid()
 
 
     def forward(self, x):        
@@ -236,7 +237,8 @@ class Classifier(nn.Module):
         h2 = self.relu(self.fc2(h1))
         h3 = self.relu(self.fc3(h2))
         h4 = self.relu(self.fc4(h3))
-        return h4
+        h5 = self.relu(self.fc5(h4))
+        return h5
 
 
 model = Classifier()
@@ -244,19 +246,19 @@ if usecuda:
     model.cuda(idgpu)
 
 # Training will be done twice
-# Phase 1 - train on first 3 labels and test on the remaining 3
-# Phase 2 - train on last 3 labels and test on the first 3
+# Phase 1 - train on first 9 labels and test on the remaining 10
+# Phase 2 - train on last 10 labels and test on the first 9
 
 print("Training will be done twice")
-print("Phase 1 - train from scratch on first 3 labels and test on the remaining 3")
-print("Phase 2 - train from scratch on last 3 labels and test on the first 3")
+print("Phase 1 - train from scratch on first 9 labels and test on the remaining 10")
+print("Phase 2 - train from scratch on last 10 labels and test on the first 9")
 
 
 
 
-# Train on first 3 label and test on rest
+# Train on first 9 label and test on rest
 
-print("Phase 1 starts----------Train on first 3 label and test on rest---------")
+print("Phase 1 starts----------Train on first 9 label and test on rest---------")
 optimizer = optim.Adam(model.parameters(), lr=1e-4)
 avg_loss_train=[]
 avg_loss_test=[]
@@ -380,7 +382,8 @@ def train(epoch):
         else:
             batchloss = 0
 
-        #Accuracy
+
+        
         corCountTotal = corCountTotal + corCount      
 
         if batch_idx % loginterval == 0:
@@ -459,7 +462,6 @@ def testval(epoch):
             problabelRounded = torch.zeros(1,n_labels)
             problabelRounded[0,pos.data.item()] = 1
 
-            # problabelRounded = (problabel>=0.5).type(torch.cuda.FloatTensor)
 
             target = actLabelList.view(n_labels,1)
             target = Variable(target)
@@ -573,12 +575,12 @@ for epoch in range(1, epochs):
 
 avg_F1_scores = avg_F1_scores + phase1_F1_scores
 
-path =  './results/emotions/base{}shot/emotions_first_{}.torch'.format(args.shot,epoch)
+path =  './results/birds/base{}shot/birds_first_{}.torch'.format(args.shot,epoch)
 torch.save(model.state_dict(), path)
 
-# Train on last 3 labels and test on the first 3 labels
+# Train on last 10 labels and test on the first 9 labels
 
-print("Phase 2 starts----------Train on first 3 labels and test on rest---------")
+print("Phase 2 starts----------Train on last 10 labels and test on rest---------")
 
 # reinitialising the classifier
 print("reinitialising the classifier")
@@ -656,7 +658,6 @@ def trainrest(epoch):
             problabelRounded = torch.zeros(1,n_labels)
             problabelRounded[0,pos.data.item()] = 1
 
-            # problabelRounded = (problabel>=0.5).type(torch.cuda.FloatTensor)
 
             target = actLabelList.view(n_labels,1)
             target = Variable(target)
@@ -669,9 +670,8 @@ def trainrest(epoch):
                 if(labelprod[lp,0].data.item()>0):
                     cellsum = cellsum + (-1*torch.log(labelprod[lp,0]))
 
-            logloss =  cellsum/n_labels#torch.mean(-1*torch.log(softmaxProb*target))
+            logloss =  cellsum/n_labels
 
-    #             print(torch.sum(problabelRounded == target))
             if( torch.sum(problabelRounded == actLabelList) == n_labels):
                 corCount = corCount + 1
 
@@ -711,7 +711,8 @@ def trainrest(epoch):
         else:
             batchloss = 0
 
-        #Accuracy
+
+        
         corCountTotal = corCountTotal + corCount      
 
         if batch_idx % loginterval == 0:
@@ -840,7 +841,6 @@ def testvalrest(epoch):
             batchloss = loss.data.item()
         else:
             batchloss = loss
-
         
         corCountTotal = corCountTotal + corCount
         
@@ -854,6 +854,7 @@ def testvalrest(epoch):
         epoch, test_loss))
     
    
+    print()
     print("------------------------------------------")
 
     # uncomment print statements to get the label wise F1 score
@@ -912,7 +913,7 @@ for epoch in range(1, epochs):
 avg_F1_scores = avg_F1_scores + phase2_F1_scores
 
 
-path =  './results/emotions/base{}shot/emotions_last_{}.torch'.format(args.shot,epoch)
+path =  './results/birds/base{}shot/birds_last_{}.torch'.format(args.shot,epoch)
 torch.save(model.state_dict(), path)
 
           
