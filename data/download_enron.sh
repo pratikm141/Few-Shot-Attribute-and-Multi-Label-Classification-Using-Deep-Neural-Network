@@ -7,7 +7,7 @@ checkCmd() {
 checkCmd wget
 checkCmd unzip
 
-###### Download emotions dataset
+###### Download enron dataset
 
 rm -rf enron
 mkdir -p enron

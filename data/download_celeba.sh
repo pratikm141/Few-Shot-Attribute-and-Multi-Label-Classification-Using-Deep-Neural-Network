@@ -7,7 +7,7 @@ checkCmd() {
 checkCmd wget
 checkCmd unzip
 
-###### Download birds dataset
+###### Download celeba dataset
 
 rm -rf celeba
 mkdir -p celeba

@@ -2,7 +2,7 @@ from __future__ import print_function
 from collections import defaultdict
 import numpy as np
 import torch
-
+print("preprocessing- converting data to tensor")
 import tqdm
 labelfile = open("./birds/birds-train.arff","r")
 featlist = []

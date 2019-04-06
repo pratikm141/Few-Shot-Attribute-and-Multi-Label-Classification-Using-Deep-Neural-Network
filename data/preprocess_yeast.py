@@ -3,6 +3,8 @@ from collections import defaultdict
 import numpy as np
 import torch
 
+print("preprocessing- converting data to tensor")
+
 import tqdm
 labelfile = open("./yeast/yeast.arff","r")
 i = 0

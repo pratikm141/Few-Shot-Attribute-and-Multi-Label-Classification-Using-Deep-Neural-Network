@@ -18,7 +18,7 @@ import torchvision.models as models
 import random
 import os
 
-
+print("preprocessing- converting data to tensor")
 facedatatrain =datasets.ImageFolder('./lfw/lfw-deepfunneled_reduced_bkup',
                                     transforms.Compose([transforms.Scale(64),transforms.ToTensor()]))
 

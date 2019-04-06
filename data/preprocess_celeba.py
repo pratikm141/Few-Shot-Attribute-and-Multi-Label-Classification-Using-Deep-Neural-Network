@@ -18,7 +18,7 @@ import torchvision.models as models
 import random
 import os
 
-
+print("preprocessing- converting data to tensor")
 import pickle
 import tqdm
 
@@ -40,13 +40,10 @@ for line in tqdm.tqdm(file):
     row.append(im)
 
 file.close()
-# len(linesplit)
+
 
 labels = torch.Tensor(row)
 
-#boollabels = labels >0
-
-#floatlabels = boollabels.type(torch.FloatTensor)
 
 pickle.dump(labels,open('./celeba/labelcelebA.pkl','wb'))
 

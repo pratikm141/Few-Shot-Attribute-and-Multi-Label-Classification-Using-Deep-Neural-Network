@@ -2,7 +2,7 @@ from __future__ import print_function
 from collections import defaultdict
 import numpy as np
 import torch
-
+print("preprocessing- converting data to tensor")
 import tqdm
 labelfile = open("./enron/enron.dat","r")
 featlist = []
@@ -12,11 +12,11 @@ for line in tqdm.tqdm(labelfile):
     cnt = cnt + 1
     if(cnt<1059):
         continue
-#     print('here')
+
     linelist = line.split(",")
     linefeat = linelist[:1001]
     linelabel = linelist[1001:]
-#     print('line',linelist)
+
     featlistrow = []
     labellistrow = []
     
@@ -29,7 +29,7 @@ for line in tqdm.tqdm(labelfile):
     
     featlist.append(featlistrow)
     labellist.append(labellistrow)
-#     break
+
 labelfile.close()
 
 

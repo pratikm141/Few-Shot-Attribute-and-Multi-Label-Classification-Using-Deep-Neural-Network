@@ -2,7 +2,7 @@ from __future__ import print_function
 from collections import defaultdict
 import numpy as np
 import torch
-
+print("preprocessing- converting data to tensor")
 import tqdm
 labelfile = open("./scene/scene.dat","r")
 featlist = []
@@ -12,11 +12,11 @@ for line in tqdm.tqdm(labelfile):
     cnt = cnt + 1
     if(cnt<305):
         continue
-#     print('here')
+
     linelist = line.split(",")
     linefeat = linelist[:294]
     linelabel = linelist[294:]
-#     print('line',linelist)
+
     featlistrow = []
     labellistrow = []
     

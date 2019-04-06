@@ -7,7 +7,7 @@ checkCmd() {
 checkCmd wget
 checkCmd unzip
 
-###### Download emotions dataset
+###### Download medical dataset
 
 rm -rf medical
 mkdir -p medical

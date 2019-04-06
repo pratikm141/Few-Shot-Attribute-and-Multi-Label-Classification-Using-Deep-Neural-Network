@@ -7,7 +7,7 @@ checkCmd() {
 checkCmd wget
 checkCmd unzip
 
-###### Download dataset
+###### Download LFW dataset
 
 rm -rf lfw
 mkdir -p lfw
@@ -21,3 +21,4 @@ unzip lfw-deepfunneled_reduced.zip
 
 cd ..
 python preprocess_LFW.py
+
