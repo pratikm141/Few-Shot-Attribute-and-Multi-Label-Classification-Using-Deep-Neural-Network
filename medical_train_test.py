@@ -30,13 +30,14 @@ parser.add_argument('--shot',default=20,type=int)
 args = parser.parse_args()
 
 if(args.epochs<2):
-    print("--epochs should be more than 2")
+    print("--epochs should be more than 1")
     os._exit(1)
 
 print('gpu ',args.gpu,' shot=',args.shot)
 
 idgpu = args.gpu
-
+os.environ['CUDA_VISIBLE_DEVICES'] = str(idgpu)
+idgpu = 0
 usecuda = not args.no_cuda and torch.cuda.is_available()
 batch_size = 64
 epochs = args.epochs
@@ -945,6 +946,6 @@ path =  './results/medical/FSML{}shot/medical_last_{}.torch'.format(args.shot,ep
 torch.save(model.state_dict(), path)
 
           
-avg_F1_scores = avg_F1_scores/total_labels
+avg_F1_scores = avg_F1_scores/(100*total_labels)
 print()
 print('Average Test F1 Score after {} epochs = {:.4f}'.format(epochs-1,avg_F1_scores))
