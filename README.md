@@ -7,7 +7,7 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
   * Note: We currently only support Python 3+.
 - Install unzip and unrar
 - Then download the dataset by following the [instructions](#Datasets) below.
-- Follow the [run instructions](#Eperiments) below for training and testing the model.
+- Follow the [run instructions](#Experiments) below for training and testing the model.
 
 ## Datasets
 - Go to the download folder
