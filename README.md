@@ -31,7 +31,7 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
 - Run the &lt;...&gt;_train_test.py file to get the results for our proposed Multi-Label model
 - Run the &lt;...&gt;_train_test_baseline.py file to get the results for the baseline
 - Provide additional choices:
-  * --gpu _ :gpu id on which the program will be run
+  * --gpu _ : gpu id on which the program will be run
   * --epochs _ : Number of iterations(default 20) for Phase 1 (train on first half of labels and test on remaining) and Phase 2 (train on second half of labels and test on remaining). Each iteration has 1000 episodes
   * --shot _ : N-shot - Number of support examples per label (default 20).
 - Average Test F1 Score will be displayed after the Phase 1 and Phase 2 tests are completed
