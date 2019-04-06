@@ -33,5 +33,5 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
 - Provide additional choices:
   * --gpu _ :gpu id on which the program will be run
   * --epochs _ : Number of epochs(default 20) for Phase 1 (train on first half of labels and test on remaining) and Phase 2 (train on second half of labels and test on remaining). Each epoch has 1000 episodes
-  * --shot _ : N-shot - Number of support examples per label (deafult 20).
+  * --shot _ : N-shot - Number of support examples per label (default 20).
 - Average Test F1 Score will be displayed after the Phase 1 and Phase 2 tests are completed
