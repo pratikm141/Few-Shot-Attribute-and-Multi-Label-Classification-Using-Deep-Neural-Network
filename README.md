@@ -9,8 +9,8 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
 
 ## Datasets
 - Go to the download folder
-- Run "sh download_<dataset>.sh" to download and preprocess the datasets
+- Run "sh download_&lt;dataset&gt;.sh" to download and preprocess the datasets
 
 ## Experiments
-- Run the <...>_train_test.py file to get the results for our proposed Multi-Label model
-- Run the <...>_train_test_baseline.py file to get the results for the baseline
+- Run the &lt;...&gt;_train_test.py file to get the results for our proposed Multi-Label model
+- Run the &lt;...&gt;_train_test_baseline.py file to get the results for the baseline
