@@ -10,7 +10,7 @@ Code for Few-Shot Attribute and Multi-Label Classification Using Deep Neural Net
 - Follow the [run instructions](#Experiments) below for training and testing the model.
 
 ## Datasets
-- Go to the download folder
+- Go to the data folder
 - Run "sh download_&lt;dataset&gt;.sh" to download and preprocess the datasets
 - The prepocessing code for each dataset will be automatically called by the corresponding download_&lt;dataset&gt;.sh file
 - Some of the datasets are downloaded directly from the main repository.
